@@ -4,9 +4,9 @@ const { Header, Content, Sider } = Layout;
 export default function (props: { children: any }): ReactElement {
     return (
         <Layout className="h-screen">
-            <Header>Header</Header>
+            <Header className="bg-green-300">Header</Header>
             <Layout>
-                <Sider>Sider</Sider>
+                <Sider theme="light">Sider</Sider>
                 <Content className="p-3">{props.children}</Content>
             </Layout>
         </Layout>

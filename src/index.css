@@ -4,5 +4,5 @@
 @import "~antd/dist/antd.css";
 
 .basePage {
-    @apply bg-white h-full w-full;
+    @apply bg-white h-full w-full overflow-scroll;
 }

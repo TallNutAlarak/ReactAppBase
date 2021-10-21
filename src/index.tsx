@@ -4,14 +4,21 @@ import { BrowserRouter } from "react-router-dom";
 
 import App from "@app/index";
 import "./index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 import { ContextProvider, myContext } from "@store";
+
+const queryClient = new QueryClient();
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
             <ContextProvider>
-                <App />
+                <QueryClientProvider client={queryClient}>
+                    <App />
+                    <ReactQueryDevtools></ReactQueryDevtools>
+                </QueryClientProvider>
             </ContextProvider>
         </BrowserRouter>
     </React.StrictMode>,
