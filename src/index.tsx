@@ -7,19 +7,19 @@ import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
-import { ContextProvider, myContext } from "@store";
+import { AppContextProvider, appContext } from "@store";
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <ContextProvider>
+            <AppContextProvider>
                 <QueryClientProvider client={queryClient}>
                     <App />
                     <ReactQueryDevtools></ReactQueryDevtools>
                 </QueryClientProvider>
-            </ContextProvider>
+            </AppContextProvider>
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById("root")

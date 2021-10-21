@@ -3,14 +3,18 @@ import React, { useReducer } from "react";
 const initialState = {
     isLogin: false,
 };
-const myContext = React.createContext<{
-    state?: typeof initialState;
-    dispatch?: React.Dispatch<any>;
-}>({});
 
-function reducer(state: any, action: any) {
-    console.log("reducer", state, action);
+const appContext = React.createContext<{
+    state: typeof initialState;
+    dispatch: React.Dispatch<any>;
+}>({
+    state: initialState,
+    dispatch: () => {},
+});
 
+
+function reducer(state: typeof initialState, action: any) {
+    console.log("dispatch: ", state, action);
     switch (action.type) {
         case "reset":
             return initialState;
@@ -23,13 +27,13 @@ function reducer(state: any, action: any) {
     }
 }
 
-const ContextProvider = (props: any) => {
+const AppContextProvider = (props: any) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
-        <myContext.Provider value={{ state, dispatch }}>
+        <appContext.Provider value={{ state, dispatch }}>
             {props.children}
-        </myContext.Provider>
+        </appContext.Provider>
     );
 };
 
-export { myContext, ContextProvider };
+export { appContext, AppContextProvider };

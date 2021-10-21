@@ -2,21 +2,27 @@ import React, { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import Login from "@pages/login";
-import { myContext } from "@store";
+import { appContext } from "@store";
 import Router from "@router";
 
 import Layout from "@components/layout";
 
 function App() {
-    const { state } = useContext(myContext);
+    const { state } = useContext(appContext);
     return (
         <div className="w-screen h-screen">
             {state?.isLogin ? (
-                <>
+                <Switch>
+                    <Route
+                        key="/login"
+                        exact
+                        path="/login"
+                        component={Login}
+                    ></Route>
                     <Layout>
                         <Router></Router>
                     </Layout>
-                </>
+                </Switch>
             ) : (
                 <Switch>
                     <Route
