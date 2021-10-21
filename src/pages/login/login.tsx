@@ -1,27 +1,47 @@
 import React, { ReactElement, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useMutation } from "react-query";
 
 import { appContext } from "@store";
 
-import { Form, Input, Button, Modal } from "antd";
+import { Form, Input, Button, Modal, message } from "antd";
 
 export default function Login(): ReactElement {
     const history = useHistory();
     const { dispatch, state } = useContext(appContext);
 
+    // 登录
     const [loginForm] = Form.useForm();
+    const loginMutation = useMutation(
+        (p) => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(true);
+                }, 1000);
+            });
+        },
+        {
+            onError(error, variables, context) {
+                message.error("登录发生错误");
+            },
+            onSuccess(data, variables, context) {
+                console.log(data, variables, context);
+                message.success("登录成功");
+                dispatch({
+                    type: "login",
+                });
+                history.push("/");
+            },
+        }
+    );
 
     // 注册
     const [registerVisible, setRegisterVisible] = useState<boolean>(false);
     const [registerForm] = Form.useForm();
 
-    const handleClick = async () => {
+    const handleLogin = async () => {
         const validated = await loginForm.validateFields();
-        console.log(validated);
-        dispatch({
-            type: "login",
-        });
-        history.push("/");
+        loginMutation.mutate(validated);
     };
 
     return (
@@ -60,7 +80,8 @@ export default function Login(): ReactElement {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            onClick={handleClick}
+                            onClick={handleLogin}
+                            loading={loginMutation.isLoading}
                         >
                             登录
                         </Button>

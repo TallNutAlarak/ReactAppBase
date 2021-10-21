@@ -4,14 +4,18 @@ const { SubMenu } = Menu;
 
 export default function (): ReactElement {
     return (
-        <Menu mode="inline">
+        <Menu
+            mode="inline"
+            defaultOpenKeys={["sub2"]}
+            defaultSelectedKeys={["test"]}
+        >
             <SubMenu key="sub2" title="Navigation Two">
-                <Menu.Item key="5">Option 5</Menu.Item>
+                <Menu.Item key="test">test</Menu.Item>
                 <Menu.Item key="6">Option 6</Menu.Item>
-                <SubMenu key="sub3" title="Submenu">
-                    <Menu.Item key="7">Option 7</Menu.Item>
-                    <Menu.Item key="8">Option 8</Menu.Item>
-                </SubMenu>
+            </SubMenu>
+            <SubMenu key="sub3" title="Navigation 3">
+                <Menu.Item key="8">Option 8</Menu.Item>
+                <Menu.Item key="9">Option 9</Menu.Item>
             </SubMenu>
         </Menu>
     );
