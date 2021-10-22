@@ -32,7 +32,7 @@ export default function (): ReactElement {
             <Card title="业务监控">
                 <Form layout="inline">
                     <Space wrap align="start">
-                        <Form.Item label="事务ID查询">
+                        <Form.Item label="查询">
                             <Input
                                 style={{ width: 175 }}
                                 placeholder="请输入事务ID"

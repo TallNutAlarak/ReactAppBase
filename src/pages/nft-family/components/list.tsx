@@ -4,6 +4,7 @@ import {
     SearchOutlined,
     RollbackOutlined,
     FileAddOutlined,
+    PlusOutlined,
 } from "@ant-design/icons";
 
 import type { ColumnsType } from "antd/lib/table";
@@ -45,7 +46,7 @@ export default function ({ goToEdit, goToAdd }: IProps): ReactElement {
             <Card title="NFT族管理">
                 <Form layout="inline">
                     <Space wrap align="start">
-                        <Form.Item label="NFT族查询">
+                        <Form.Item label="查询">
                             <Input
                                 style={{ width: 175 }}
                                 placeholder="请输入NFT族"
@@ -84,7 +85,7 @@ export default function ({ goToEdit, goToAdd }: IProps): ReactElement {
                     <Space>
                         <Button
                             className="flex justify-center items-center"
-                            icon={<FileAddOutlined />}
+                            icon={<PlusOutlined />}
                             type="primary"
                             onClick={goToAdd}
                         >

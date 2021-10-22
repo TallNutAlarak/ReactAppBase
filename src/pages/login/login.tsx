@@ -47,6 +47,10 @@ export default function Login(): ReactElement {
         const validated = await loginForm.validateFields();
         loginMutation.mutate(validated);
     };
+    const handleCancelRegister = () => {
+        setRegisterVisible(false);
+        registerForm.resetFields();
+    };
 
     return (
         <div
@@ -101,6 +105,7 @@ export default function Login(): ReactElement {
                     <div className="mt-2">
                         <Button
                             block
+                            size="large"
                             type="primary"
                             htmlType="submit"
                             onClick={handleLogin}
@@ -110,6 +115,7 @@ export default function Login(): ReactElement {
                         </Button>
                         <Button
                             className="mt-3"
+                            size="large"
                             block
                             onClick={() => {
                                 setRegisterVisible(true);
@@ -122,10 +128,7 @@ export default function Login(): ReactElement {
             </div>
             <Modal
                 width={400}
-                onCancel={() => {
-                    setRegisterVisible(false);
-                    registerForm.resetFields();
-                }}
+                onCancel={handleCancelRegister}
                 maskClosable
                 footer={null}
                 destroyOnClose
@@ -201,7 +204,9 @@ export default function Login(): ReactElement {
                         <Button size="large" htmlType="submit" type="primary">
                             提交
                         </Button>
-                        <Button size="large">取消</Button>
+                        <Button onClick={handleCancelRegister} size="large">
+                            取消
+                        </Button>
                     </div>
                 </Form>
             </Modal>
