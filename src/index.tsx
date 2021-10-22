@@ -6,6 +6,8 @@ import App from "@app/index";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import zhCN from "antd/lib/locale/zh_CN";
+import { ConfigProvider } from "antd";
 
 import { AppContextProvider, appContext } from "@store";
 
@@ -13,14 +15,16 @@ const queryClient = new QueryClient();
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <AppContextProvider>
-                <QueryClientProvider client={queryClient}>
-                    <App />
-                    <ReactQueryDevtools></ReactQueryDevtools>
-                </QueryClientProvider>
-            </AppContextProvider>
-        </BrowserRouter>
+        <ConfigProvider locale={zhCN}>
+            <BrowserRouter>
+                <AppContextProvider>
+                    <QueryClientProvider client={queryClient}>
+                        <App />
+                        <ReactQueryDevtools></ReactQueryDevtools>
+                    </QueryClientProvider>
+                </AppContextProvider>
+            </BrowserRouter>
+        </ConfigProvider>
     </React.StrictMode>,
     document.getElementById("root")
 );

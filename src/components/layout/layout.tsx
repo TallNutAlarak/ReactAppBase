@@ -16,7 +16,7 @@ export default function (props: { children: any }): ReactElement {
                 <Sider>
                     <SiderMenu></SiderMenu>
                 </Sider>
-                <Content className="p-3">{props.children}</Content>
+                <Content className="p-3 overflow-scroll">{props.children}</Content>
             </Layout>
         </Layout>
     );

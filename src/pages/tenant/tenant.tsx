@@ -42,7 +42,7 @@ export default function (): ReactElement {
             <Card title="租户管理">
                 <Form layout="inline">
                     <Space wrap align="start">
-                        <Form.Item label="输入查询">
+                        <Form.Item label="账户查询">
                             <Input
                                 style={{ width: 175 }}
                                 placeholder="请输入账户"

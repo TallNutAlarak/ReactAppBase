@@ -1,5 +1,6 @@
 const path = require("path");
 const WebpackBar = require("webpackbar");
+const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
 
 const resolve = (dir) => path.resolve(__dirname, dir);
 
@@ -17,6 +18,7 @@ module.exports = ({ env: webpackEnv }) => {
                     name: webpackEnv !== "production" ? "正在启动" : "正在打包",
                     color: "#fa8c16",
                 }),
+                new AntdDayjsWebpackPlugin(),
             ],
             alias: {
                 "@": resolve("src"),
