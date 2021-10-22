@@ -1,22 +1,34 @@
 import React, { ReactElement } from "react";
 import { Layout, Button, Menu } from "antd";
-const { SubMenu } = Menu;
+import { useLocation, useHistory } from "react-router-dom";
+
+import { routes } from "@router/routes";
+
+import type { SelectInfo } from "rc-menu/lib/interface";
 
 export default function (): ReactElement {
+    const loaction = useLocation();
+    const history = useHistory();
+    const handleMenuItemSelectChange = ({
+        item,
+        key,
+        keyPath,
+        selectedKeys,
+        domEvent,
+    }: SelectInfo) => {
+        history.push(key);
+    };
     return (
         <Menu
+            theme="dark"
+            className="bg-transparent text-white "
             mode="inline"
-            defaultOpenKeys={["sub2"]}
-            defaultSelectedKeys={["test"]}
+            selectedKeys={[loaction.pathname]}
+            onSelect={handleMenuItemSelectChange}
         >
-            <SubMenu key="sub2" title="Navigation Two">
-                <Menu.Item key="test">test</Menu.Item>
-                <Menu.Item key="6">Option 6</Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub3" title="Navigation 3">
-                <Menu.Item key="8">Option 8</Menu.Item>
-                <Menu.Item key="9">Option 9</Menu.Item>
-            </SubMenu>
+            {routes.map((route) => {
+                return <Menu.Item key={route.path}>{route.name}</Menu.Item>;
+            })}
         </Menu>
     );
 }

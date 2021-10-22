@@ -1,11 +1,19 @@
 import { Switch, Route, Redirect } from "react-router-dom";
-import TestPage from "@pages/test-page";
+import { routes } from "./routes";
 
 const Router = () => {
     return (
         <Switch>
-            <Redirect exact from="/" to="/test"></Redirect>
-            <Route exact path="/test" component={TestPage}></Route>
+            <Redirect exact from="/" to="/nft"></Redirect>
+            {routes.map((route) => {
+                return (
+                    <Route
+                        exact
+                        path={route.path}
+                        component={route.component}
+                    ></Route>
+                );
+            })}
             <Route
                 path="/404"
                 render={() => (

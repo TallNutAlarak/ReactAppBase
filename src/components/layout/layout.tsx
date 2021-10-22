@@ -9,11 +9,11 @@ const { Header, Content, Sider } = Layout;
 export default function (props: { children: any }): ReactElement {
     return (
         <Layout className="h-screen">
-            <Header className="bg-green-300">
+            <Header style={{ background: "#464b5c" }}>
                 <HeaderContent></HeaderContent>
             </Header>
             <Layout>
-                <Sider theme="light">
+                <Sider>
                     <SiderMenu></SiderMenu>
                 </Sider>
                 <Content className="p-3">{props.children}</Content>
