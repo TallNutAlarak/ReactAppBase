@@ -13,6 +13,11 @@ export default function (): ReactElement {
                 size="large"
                 className="h-full text-white  bg-transparent border-0 flex justify-center items-center hover:bg-green-300 hover:text-white"
                 icon={<DownloadOutlined />}
+                onClick={() => {
+                    dispatch({
+                        type: "logout",
+                    });
+                }}
             >
                 退出登录
             </Button>

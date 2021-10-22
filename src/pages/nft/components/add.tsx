@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { Card, Space, Form, Input, Button, Table, Switch } from "antd";
+import { Card, Space, Form, Input, Button, Table, Switch, Select } from "antd";
 
 import { ArrowLeftOutlined } from "@ant-design/icons";
 
@@ -17,7 +17,7 @@ export default function ({ goToList }: IProps): ReactElement {
                             className="w-6 hover:text-blue-600 cursor-pointer"
                             onClick={goToList}
                         />
-                        创建NFT族
+                        创建NFT
                     </div>
                     <div>
                         <span className="text-red-500 ">*</span>
@@ -29,19 +29,31 @@ export default function ({ goToList }: IProps): ReactElement {
             <Form layout="vertical">
                 <div className="text-base mb-6">基础信息</div>
                 <Form.Item
-                    label="NFT族名称"
+                    label="NFT族"
                     name="nftFamilyName"
+                    className="w-96"
                     rules={[
                         {
                             required: true,
-                            message: "请填写NFT族名称",
+                            message: "请现在NFT族",
+                        },
+                    ]}
+                >
+                    <Select size="large"></Select>
+                </Form.Item>
+                <Form.Item
+                    label="NFT名称"
+                    rules={[
+                        {
+                            required: true,
+                            message: "请输入NFT名称",
                         },
                     ]}
                 >
                     <Input
                         size="large"
                         className="w-96"
-                        placeholder="请填写NFT族名称"
+                        placeholder="请填写NFT名称"
                     ></Input>
                 </Form.Item>
                 <Form.Item label="属性字段">
@@ -49,24 +61,6 @@ export default function ({ goToList }: IProps): ReactElement {
                         placeholder="请输入属性信息"
                         autoSize={{ minRows: 4 }}
                     ></Input.TextArea>
-                </Form.Item>
-                <div className="text-base mb-6">功能配置</div>
-                <Form.Item
-                    label="权限设置"
-                    name="role"
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
-                >
-                    <Switch
-                        checkedChildren="允许"
-                        unCheckedChildren="禁止"
-                    ></Switch>
-                    <div className="mt-2 text-red-500">
-                        所有权限包括转移权、销毁权、回收权等
-                    </div>
                 </Form.Item>
                 <Form.Item>
                     <Space>

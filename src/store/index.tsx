@@ -21,7 +21,7 @@ function reducer(state: typeof initialState, action: any) {
         case "login":
             return { ...state, isLogin: true, role: action.payload.role };
         case "logout":
-            return { ...state, isLogin: false };
+            return { ...state, isLogin: false, role: null };
         default:
             return state;
     }

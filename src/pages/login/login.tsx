@@ -198,10 +198,10 @@ export default function Login(): ReactElement {
                         <Input.Password></Input.Password>
                     </Form.Item>
                     <div className="flex justify-around">
-                        <Button htmlType="submit" type="primary">
+                        <Button size="large" htmlType="submit" type="primary">
                             提交
                         </Button>
-                        <Button>取消</Button>
+                        <Button size="large">取消</Button>
                     </div>
                 </Form>
             </Modal>

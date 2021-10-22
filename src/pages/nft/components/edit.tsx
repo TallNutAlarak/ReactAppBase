@@ -25,13 +25,13 @@ export default function edit({ goToList }: IProps): ReactElement {
                         className="w-6 hover:text-blue-600 cursor-pointer"
                         onClick={goToList}
                     />
-                    NFT族编辑
+                    NFT编辑
                 </div>
             }
         >
             <Descriptions column={2} title="基本信息" bordered>
-                <Descriptions.Item label="NFT族名称">靓号</Descriptions.Item>
-                <Descriptions.Item label="编号">Prepaid</Descriptions.Item>
+                <Descriptions.Item label="NFT名称">靓号</Descriptions.Item>
+                <Descriptions.Item label="NFT族">Prepaid</Descriptions.Item>
                 <Descriptions.Item label="创建时间">Prepaid</Descriptions.Item>
                 <Descriptions.Item label="创建账号">Prepaid</Descriptions.Item>
             </Descriptions>
@@ -42,25 +42,7 @@ export default function edit({ goToList }: IProps): ReactElement {
                         autoSize={{ minRows: 4 }}
                     ></Input.TextArea>
                 </Form.Item>
-                <div className="text-base mb-6">功能配置</div>
-                <Form.Item
-                    label="可用状态"
-                    name="role"
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
-                >
-                    <Switch
-                        checkedChildren="可用"
-                        unCheckedChildren="禁用"
-                    ></Switch>
-                    <div className="mt-2 text-red-500">
-                        所有权限包括转移权、销毁权、回收权等
-                    </div>
-                </Form.Item>
-                <Form.Item>
+                <Form.Item className="mt-12">
                     <Space>
                         <Button
                             className="w-36"
