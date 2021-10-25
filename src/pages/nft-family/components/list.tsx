@@ -42,6 +42,7 @@ export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
     const [pageNumber, setPageNumber] = useState<number>(1);
     const [pageSize, setPageSize] = useState<number>(10);
 
+    const queryClient = useQueryClient();
     const [searchConditionForm] = Form.useForm();
 
     const [searchCondition, setSearchCondition] = useState({});
@@ -91,7 +92,7 @@ export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
             dataIndex: "id",
         },
         {
-            title: "NFT族",
+            title: "NFT类别",
             dataIndex: "family",
         },
         {
@@ -125,13 +126,13 @@ export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
             direction="vertical"
             className={`w-full ${isShow ? "" : "hidden"}`}
         >
-            <Card title="NFT族管理">
+            <Card title="NFT类别管理">
                 <Form layout="inline" form={searchConditionForm}>
                     <Space wrap align="start">
                         <Form.Item label="查询" name="fieldFamily">
                             <Input
                                 style={{ width: 175 }}
-                                placeholder="请输入NFT族"
+                                placeholder="请输入NFT类别"
                             ></Input>
                         </Form.Item>
                         <Form.Item label="添加时间" name="fieldCreatedAt">

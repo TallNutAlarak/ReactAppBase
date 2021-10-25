@@ -5,7 +5,7 @@ import BusinessMonitor from "@pages/business-monitor";
 
 export const routes = [
     {
-        name: "NFT族管理",
+        name: "NFT类别管理",
         path: "/nft-family",
         permission: ["admin", "tenant"],
         component: NftFamily,

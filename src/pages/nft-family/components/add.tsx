@@ -17,7 +17,7 @@ export default function ({ goToList }: IProps): ReactElement {
                             className="w-6 hover:text-blue-600 cursor-pointer"
                             onClick={goToList}
                         />
-                        创建NFT族
+                        创建NFT类别
                     </div>
                     <div>
                         <span className="text-red-500 ">*</span>
@@ -29,19 +29,19 @@ export default function ({ goToList }: IProps): ReactElement {
             <Form layout="vertical">
                 <div className="text-base mb-6">基础信息</div>
                 <Form.Item
-                    label="NFT族名称"
+                    label="NFT类别名称"
                     name="nftFamilyName"
                     rules={[
                         {
                             required: true,
-                            message: "请填写NFT族名称",
+                            message: "请填写NFT类别名称",
                         },
                     ]}
                 >
                     <Input
                         size="large"
                         className="w-96"
-                        placeholder="请填写NFT族名称"
+                        placeholder="请填写NFT类别名称"
                     ></Input>
                 </Form.Item>
                 <Form.Item label="属性字段">

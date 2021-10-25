@@ -31,7 +31,7 @@ export default function edit({ goToList }: IProps): ReactElement {
         >
             <Descriptions column={2} title="基本信息" bordered>
                 <Descriptions.Item label="NFT名称">靓号</Descriptions.Item>
-                <Descriptions.Item label="NFT族">Prepaid</Descriptions.Item>
+                <Descriptions.Item label="NFT类别">Prepaid</Descriptions.Item>
                 <Descriptions.Item label="创建时间">Prepaid</Descriptions.Item>
                 <Descriptions.Item label="创建账号">Prepaid</Descriptions.Item>
             </Descriptions>

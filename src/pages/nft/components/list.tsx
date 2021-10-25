@@ -19,7 +19,7 @@ export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
             title: "编号",
         },
         {
-            title: "NFT族",
+            title: "NFT类别",
         },
         {
             title: "属性字段",
@@ -52,7 +52,7 @@ export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
                         <Form.Item label="查询">
                             <Input
                                 style={{ width: 175 }}
-                                placeholder="请输入NFT族"
+                                placeholder="请输入NFT类别"
                             ></Input>
                         </Form.Item>
                         <Form.Item>

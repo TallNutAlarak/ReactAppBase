@@ -25,12 +25,12 @@ export default function edit({ goToList }: IProps): ReactElement {
                         className="w-6 hover:text-blue-600 cursor-pointer"
                         onClick={goToList}
                     />
-                    NFT族编辑
+                    NFT类别编辑
                 </div>
             }
         >
             <Descriptions column={2} title="基本信息" bordered>
-                <Descriptions.Item label="NFT族名称">靓号</Descriptions.Item>
+                <Descriptions.Item label="NFT类别名称">靓号</Descriptions.Item>
                 <Descriptions.Item label="编号">Prepaid</Descriptions.Item>
                 <Descriptions.Item label="创建时间">Prepaid</Descriptions.Item>
                 <Descriptions.Item label="创建账号">Prepaid</Descriptions.Item>

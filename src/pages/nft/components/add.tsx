@@ -29,17 +29,19 @@ export default function ({ goToList }: IProps): ReactElement {
             <Form layout="vertical">
                 <div className="text-base mb-6">基础信息</div>
                 <Form.Item
-                    label="NFT族"
+                    label="NFT类别"
                     name="nftFamilyName"
                     className="w-96"
                     rules={[
                         {
                             required: true,
-                            message: "请现在NFT族",
+                            message: "请选择NFT类别",
                         },
                     ]}
                 >
-                    <Select size="large"></Select>
+                    <Select size="large">
+                        <Select.Option value="酒">酒</Select.Option>
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     label="NFT名称"
