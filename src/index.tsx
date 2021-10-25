@@ -7,11 +7,20 @@ import "./index.css";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import zhCN from "antd/lib/locale/zh_CN";
+import dayjs from "dayjs";
 import { ConfigProvider } from "antd";
-
 import { AppContextProvider, appContext } from "@store";
+import "dayjs/locale/zh-cn";
 
-const queryClient = new QueryClient();
+dayjs.locale("zh-cn");
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+        },
+    },
+});
 
 ReactDOM.render(
     <React.StrictMode>
