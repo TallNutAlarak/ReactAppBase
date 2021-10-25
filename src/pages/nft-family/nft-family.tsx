@@ -19,12 +19,11 @@ export default function (): ReactElement {
     };
     return (
         <Space direction="vertical" className="w-full">
-            {pageMode === "list" && (
-                <NftFamilyList
-                    goToAdd={goToAdd}
-                    goToEdit={goToEdit}
-                ></NftFamilyList>
-            )}
+            <NftFamilyList
+                isShow={pageMode === "list"}
+                goToAdd={goToAdd}
+                goToEdit={goToEdit}
+            ></NftFamilyList>
             {pageMode === "add" && (
                 <NftFamilyAdd goToList={goToList}></NftFamilyAdd>
             )}

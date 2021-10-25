@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { Space } from "antd";
-import { SearchOutlined, RollbackOutlined } from "@ant-design/icons";
+import { } from "react-router-dom";
 
 import NftList from "./components/list";
 import NftAdd from "./components/add";
@@ -19,18 +19,13 @@ export default function (): ReactElement {
     };
     return (
         <Space direction="vertical" className="w-full">
-            {pageMode === "list" && (
-                <NftList
-                    goToAdd={goToAdd}
-                    goToEdit={goToEdit}
-                ></NftList>
-            )}
-            {pageMode === "add" && (
-                <NftAdd goToList={goToList}></NftAdd>
-            )}
-            {pageMode === "edit" && (
-                <NftEdit goToList={goToList}></NftEdit>
-            )}
+            <NftList
+                isShow={pageMode === "list"}
+                goToAdd={goToAdd}
+                goToEdit={goToEdit}
+            ></NftList>
+            {pageMode === "add" && <NftAdd goToList={goToList}></NftAdd>}
+            {pageMode === "edit" && <NftEdit goToList={goToList}></NftEdit>}
         </Space>
     );
 }

@@ -9,10 +9,11 @@ import {
 import type { ColumnsType } from "antd/lib/table";
 
 interface IProps {
+    isShow: boolean;
     goToEdit: () => void;
     goToAdd: () => void;
 }
-export default function ({ goToEdit, goToAdd }: IProps): ReactElement {
+export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
     const nftFamilyTableColumns: ColumnsType<Object> = [
         {
             title: "编号",
@@ -41,7 +42,10 @@ export default function ({ goToEdit, goToAdd }: IProps): ReactElement {
         },
     ];
     return (
-        <Space direction="vertical" className="w-full">
+        <Space
+            direction="vertical"
+            className={`w-full ${isShow ? "" : "hidden"}`}
+        >
             <Card title="NFT管理">
                 <Form layout="inline">
                     <Space wrap align="start">
