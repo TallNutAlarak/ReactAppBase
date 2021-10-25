@@ -1,11 +1,17 @@
+import { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { routes } from "./routes";
+import { appContext } from "@store";
 
 const Router = () => {
+    const { state } = useContext(appContext);
+    const filteredRoutes = routes.filter((route) =>
+        route.permission.includes(state?.role || "")
+    );
     return (
         <Switch>
-            <Redirect exact from="/" to="/nft"></Redirect>
-            {routes.map((route) => {
+            <Redirect exact from="/" to={filteredRoutes[0].path}></Redirect>
+            {filteredRoutes.map((route) => {
                 return (
                     <Route
                         exact

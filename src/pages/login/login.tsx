@@ -31,6 +31,7 @@ export default function Login(): ReactElement {
                 dispatch({
                     type: "login",
                     payload: {
+                        // role: "tenant",
                         role: "admin",
                     },
                 });

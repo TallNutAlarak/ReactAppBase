@@ -1,14 +1,17 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useContext } from "react";
 import { Layout, Button, Menu } from "antd";
 import { useLocation, useHistory } from "react-router-dom";
 
 import { routes } from "@router/routes";
+import { appContext } from "@store";
 
 import type { SelectInfo } from "rc-menu/lib/interface";
 
 export default function (): ReactElement {
     const loaction = useLocation();
     const history = useHistory();
+    const { state } = useContext(appContext);
+
     const handleMenuItemSelectChange = ({
         item,
         key,
@@ -26,9 +29,11 @@ export default function (): ReactElement {
             selectedKeys={[loaction.pathname]}
             onSelect={handleMenuItemSelectChange}
         >
-            {routes.map((route) => {
-                return <Menu.Item key={route.path}>{route.name}</Menu.Item>;
-            })}
+            {routes
+                .filter((route) => route.permission.includes(state?.role || ""))
+                .map((route) => {
+                    return <Menu.Item key={route.path}>{route.name}</Menu.Item>;
+                })}
         </Menu>
     );
 }
