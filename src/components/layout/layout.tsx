@@ -9,7 +9,7 @@ const { Header, Content, Sider } = Layout;
 export default function (props: { children: any }): ReactElement {
     return (
         <Layout className="h-screen">
-            <Header style={{ background: "#464b5c" }}>
+            <Header className="px-5" style={{ background: "#464b5c" }}>
                 <HeaderContent></HeaderContent>
             </Header>
             <Layout>
