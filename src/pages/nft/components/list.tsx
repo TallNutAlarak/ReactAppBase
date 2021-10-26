@@ -44,7 +44,7 @@ export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
     return (
         <Space
             direction="vertical"
-            className={`w-full ${isShow ? "" : "hidden"}`}
+            className={`flex w-full ${isShow ? "" : "hidden"}`}
         >
             <Card title="NFT管理">
                 <Form layout="inline">

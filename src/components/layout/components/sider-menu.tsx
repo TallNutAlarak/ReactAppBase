@@ -8,7 +8,7 @@ import { appContext } from "@store";
 import type { SelectInfo } from "rc-menu/lib/interface";
 
 export default function (): ReactElement {
-    const loaction = useLocation();
+    const location = useLocation();
     const history = useHistory();
     const { state } = useContext(appContext);
 
@@ -26,7 +26,7 @@ export default function (): ReactElement {
             theme="dark"
             className="bg-transparent text-white "
             mode="inline"
-            selectedKeys={[loaction.pathname]}
+            selectedKeys={[location.pathname]}
             onSelect={handleMenuItemSelectChange}
         >
             {routes

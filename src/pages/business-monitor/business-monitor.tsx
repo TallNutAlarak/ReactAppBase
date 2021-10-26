@@ -28,7 +28,7 @@ export default function (): ReactElement {
     ];
 
     return (
-        <Space direction="vertical" className="w-full">
+        <Space direction="vertical" className="flex w-full">
             <Card title="业务监控">
                 <Form layout="inline">
                     <Space wrap align="start">

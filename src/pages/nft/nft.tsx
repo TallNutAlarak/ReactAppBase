@@ -18,7 +18,7 @@ export default function (): ReactElement {
         setPageMode("add");
     };
     return (
-        <Space direction="vertical" className="w-full">
+        <div className="w-full">
             <NftList
                 isShow={pageMode === "list"}
                 goToAdd={goToAdd}
@@ -26,6 +26,6 @@ export default function (): ReactElement {
             ></NftList>
             {pageMode === "add" && <NftAdd goToList={goToList}></NftAdd>}
             {pageMode === "edit" && <NftEdit goToList={goToList}></NftEdit>}
-        </Space>
+        </div>
     );
 }
