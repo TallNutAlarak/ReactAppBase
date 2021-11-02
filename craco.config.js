@@ -24,6 +24,7 @@ module.exports = ({ env: webpackEnv }) => {
                 "@": resolve("src"),
                 "@app": resolve("src/app"),
                 "@pages": resolve("src/pages"),
+                "@layout": resolve("src/layout"),
                 "@components": resolve("src/components"),
                 "@store": resolve("src/store"),
                 "@utils": resolve("src/utils"),
