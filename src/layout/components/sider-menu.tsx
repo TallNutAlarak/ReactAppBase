@@ -29,11 +29,9 @@ export default function (): ReactElement {
             selectedKeys={[location.pathname]}
             onSelect={handleMenuItemSelectChange}
         >
-            {routes
-                .filter((route) => route.permission.includes(state?.role || ""))
-                .map((route) => {
-                    return <Menu.Item key={route.path}>{route.name}</Menu.Item>;
-                })}
+            {routes.map((route) => {
+                return <Menu.Item key={route.path}>{route.name}</Menu.Item>;
+            })}
         </Menu>
     );
 }

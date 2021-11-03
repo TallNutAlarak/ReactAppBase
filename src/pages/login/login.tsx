@@ -63,7 +63,7 @@ export default function Login(): ReactElement {
                     style={{ color: "#005b83" }}
                     className="text-2xl h-16 font-medium"
                 >
-                    NFT管理系统
+                    系统Name
                 </div>
                 <Form
                     className="w-full"

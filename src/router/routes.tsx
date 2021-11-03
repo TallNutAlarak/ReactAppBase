@@ -1,31 +1,15 @@
-import Tenant from "@pages/tenant";
-import NftFamily from "@pages/nft-family";
-import Nft from "@pages/nft";
-import BusinessMonitor from "@pages/business-monitor";
+import Page1 from "@pages/page1";
+import Page2 from "@pages/page2";
 
 export const routes = [
     {
-        name: "NFT类别管理",
-        path: "/nft-family",
-        permission: ["admin", "tenant"],
-        component: NftFamily,
+        name: "page1",
+        path: "/page1",
+        component: Page1,
     },
     {
-        name: "NFT管理",
-        path: "/nft",
-        permission: ["admin", "tenant"],
-        component: Nft,
-    },
-    {
-        name: "租户管理",
-        path: "/tenant",
-        permission: ["admin"],
-        component: Tenant,
-    },
-    {
-        name: "业务监控",
-        path: "/business-monitor",
-        permission: ["admin", "tenant"],
-        component: BusinessMonitor,
+        name: "page2",
+        path: "/page2",
+        component: Page2,
     },
 ];

@@ -5,13 +5,10 @@ import { appContext } from "@store";
 
 const Router = () => {
     const { state } = useContext(appContext);
-    const filteredRoutes = routes.filter((route) =>
-        route.permission.includes(state?.role || "")
-    );
     return (
         <Switch>
-            <Redirect exact from="/" to={filteredRoutes[0].path}></Redirect>
-            {filteredRoutes.map((route) => {
+            <Redirect exact from="/" to={routes[0].path}></Redirect>
+            {routes.map((route) => {
                 return (
                     <Route
                         exact
