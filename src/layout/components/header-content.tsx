@@ -10,7 +10,7 @@ export default function (): ReactElement {
         <div className=" h-full flex justify-between items-center">
             <Space className="text-white text-2xl">
                 <Avatar></Avatar>
-                NFT管理平台
+                XXXXX
             </Space>
             <Button
                 size="large"
