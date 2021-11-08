@@ -3,6 +3,7 @@
 */
 import request from "@services/request";
 import type { AxiosRequestConfig } from "axios";
+import { isObject } from "@utils";
 
 const gqlRequest = (data: string, axiosConfig?: AxiosRequestConfig) => {
     const { headers, ...otherAxiosConfig } = axiosConfig || {};
@@ -18,9 +19,6 @@ const gqlRequest = (data: string, axiosConfig?: AxiosRequestConfig) => {
     });
 };
 
-const isObject = (val: any) => {
-    return Object.prototype.toString.call(val) === "[object Object]";
-};
 const obj2gqlString = (obj: any) => {
     let ret = "";
     Object.keys(obj).forEach((key, index) => {
