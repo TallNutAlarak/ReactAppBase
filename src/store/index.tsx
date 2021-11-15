@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-
+import { customLog } from "@utils";
 const initialState = {
     isLogin: false,
     role: null,
@@ -10,21 +10,30 @@ const appContext = React.createContext<{
     dispatch: React.Dispatch<any>;
 }>({
     state: initialState,
-    dispatch: () => {},
+    dispatch: () => {
+        throw new Error("dispatch error");
+    },
 });
 
 function reducer(state: typeof initialState, action: any) {
-    console.log("dispatch: ", state, action);
+    customLog({ state: state, action }, "dispatch before");
+    let newState;
     switch (action.type) {
         case "reset":
-            return initialState;
+            newState = initialState;
+            break;
         case "login":
-            return { ...state, isLogin: true, role: action.payload.role };
+            newState = { ...state, isLogin: true, role: action.payload.role };
+            break;
         case "logout":
-            return { ...state, isLogin: false, role: null };
+            newState = { ...state, isLogin: false, role: null };
+            break;
         default:
-            return state;
+            newState = state;
+            break;
     }
+    customLog({ newState, action }, "dispatch after");
+    return newState;
 }
 
 const AppContextProvider = (props: any) => {
