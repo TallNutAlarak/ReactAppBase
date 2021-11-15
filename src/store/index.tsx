@@ -1,20 +1,10 @@
 import React, { useReducer } from "react";
 import { customLog } from "@utils";
+
 const initialState = {
     isLogin: false,
     role: null,
 };
-
-const appContext = React.createContext<{
-    state: typeof initialState;
-    dispatch: React.Dispatch<any>;
-}>({
-    state: initialState,
-    dispatch: () => {
-        throw new Error("dispatch error");
-    },
-});
-
 function reducer(state: typeof initialState, action: any) {
     customLog({ state: state, action }, "dispatch before");
     let newState;
@@ -35,6 +25,16 @@ function reducer(state: typeof initialState, action: any) {
     customLog({ newState, action }, "dispatch after");
     return newState;
 }
+
+const appContext = React.createContext<{
+    state: typeof initialState;
+    dispatch: React.Dispatch<any>;
+}>({
+    state: initialState,
+    dispatch: () => {
+        throw new Error("dispatch error");
+    },
+});
 
 const AppContextProvider = (props: any) => {
     const [state, dispatch] = useReducer(reducer, initialState);
