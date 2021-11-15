@@ -26,7 +26,6 @@ export default function Login(): ReactElement {
                 message.error("登录发生错误");
             },
             onSuccess(data, variables, context) {
-                console.log(data, variables, context);
                 message.success("登录成功");
                 dispatch({
                     type: "login",

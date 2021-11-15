@@ -50,9 +50,7 @@ export default function ({ goToEdit, goToAdd, isShow }: IProps): ReactElement {
     const nftFamilyListRet = useQuery<INftFamilyList>(
         ["nftFamilyList", pageNumber, pageSize, searchCondition],
         ({ queryKey }) => {
-            console.log(queryKey);
             return new Promise<INftFamilyList>((resolve, reject) => {
-                console.log("模拟发出请求");
                 setTimeout(() => {
                     resolve({
                         code: 200,
