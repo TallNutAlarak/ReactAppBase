@@ -5,6 +5,8 @@ export const isObject = (val: any) => {
 };
 
 /**
+ * 自定义console.log
+ *
  * @param {(Record<string, any> | any)} needLog 需要打印的内容，多个需要以对象形式传递
  * @param {string} [prompt] 提示语
  */

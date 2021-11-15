@@ -34,10 +34,16 @@ const obj2gqlString = (obj: any) => {
     return ret;
 };
 
-export default (tableName: string) => {
+const gqlReq = (tableName: string) => {
     return {
+        /**
+         * @param {Record<string, any>} whereCondition 查询条件 eg:{where:{},limit:10}
+         * @param {string} data 要获取的数据 eg:"{name,age,company{name}}"
+         * @param {AxiosRequestConfig} axiosConfig axios的参数
+         * @return {*}
+         */
         find: (
-            whereCondition: any,
+            whereCondition: Record<string, any>,
             data: string,
             axiosConfig?: AxiosRequestConfig
         ) => {
@@ -46,7 +52,10 @@ export default (tableName: string) => {
             })${data || {}}}`;
             return gqlRequest(gqlData, axiosConfig);
         },
-        count: (whereCondition: any, axiosConfig?: AxiosRequestConfig) => {
+        count: (
+            whereCondition: Record<string, any>,
+            axiosConfig?: AxiosRequestConfig
+        ) => {
             const gqlData = `{count_${tableName}(${
                 obj2gqlString(whereCondition) || "where:{}"
             })`;
@@ -54,3 +63,5 @@ export default (tableName: string) => {
         },
     };
 };
+
+export default gqlReq;
