@@ -1,6 +1,7 @@
 const path = require("path");
 const WebpackBar = require("webpackbar");
 const AntdDayjsWebpackPlugin = require("antd-dayjs-webpack-plugin");
+const WorkerPlugin = require("worker-plugin");
 
 const resolve = (dir) => path.resolve(__dirname, dir);
 
@@ -19,6 +20,7 @@ module.exports = ({ env: webpackEnv }) => {
                     color: "#fa8c16",
                 }),
                 new AntdDayjsWebpackPlugin(),
+                new WorkerPlugin(),
             ],
             alias: {
                 "@": resolve("src"),

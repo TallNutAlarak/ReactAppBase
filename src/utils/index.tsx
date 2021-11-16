@@ -1,3 +1,5 @@
+export { exportDataByWorker } from "./export-excel";
+
 export const errorHandler = () => {};
 
 export const isObject = (val: any) => {
@@ -10,7 +12,10 @@ export const isObject = (val: any) => {
  * @param {(Record<string, any> | any)} needLog 需要打印的内容，多个需要以对象形式传递
  * @param {string} [prompt] 提示语
  */
-export const customLog = function (needLog: Record<string, any> | any, prompt?: any) {
+export const customLog = function (
+    needLog: Record<string, any> | any,
+    prompt?: any
+) {
     if (process.env.NODE_ENV === "development") {
         console.log("%c========start=========", "color:black");
         console.group();

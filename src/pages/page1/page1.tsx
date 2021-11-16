@@ -1,6 +1,17 @@
 import React, { ReactElement, useState } from "react";
-import { Card, Space, Form, Input, Select, Button, Table, Modal } from "antd";
+import {
+    Card,
+    Space,
+    Form,
+    Input,
+    Select,
+    Button,
+    Table,
+    Modal,
+    message,
+} from "antd";
 import { SearchOutlined, RollbackOutlined } from "@ant-design/icons";
+import { exportDataByWorker } from "@utils";
 
 import type { ColumnsType } from "antd/lib/table";
 
@@ -14,22 +25,27 @@ export default function (): ReactElement {
 
     const tenantTableColumns: ColumnsType<Object> = [
         {
-            title: "事务ID",
+            title: "姓名",
+            dataIndex: "name",
         },
         {
-            title: "账户",
-        },
-        {
-            title: "操作",
-        },
-        {
-            title: "数据",
+            title: "年龄",
+            dataIndex: "age",
         },
     ];
+    const dataSource = new Array(10000).fill({
+        name: "小明",
+        age: 18,
+    });
+
+    const handleExport = () => {
+        message.info("正在导出...");
+        exportDataByWorker(tenantTableColumns, dataSource, "demo");
+    };
 
     return (
         <Space direction="vertical" className="flex w-full">
-            <Card title="业务监控">
+            <Card title="demo">
                 <Form layout="inline">
                     <Space wrap align="start">
                         <Form.Item label="查询">
@@ -69,11 +85,13 @@ export default function (): ReactElement {
                 <div className="mb-4 flex justify-between items-center">
                     <div className="text-base text-gray-700">数据列表</div>
                     <Space>
-                        {/* <Button>导出</Button>
-                        <Button>批量导出</Button> */}
+                        <Button onClick={handleExport}>导出</Button>
                     </Space>
                 </div>
-                <Table dataSource={[{}]} columns={tenantTableColumns}></Table>
+                <Table
+                    dataSource={dataSource}
+                    columns={tenantTableColumns}
+                ></Table>
             </Card>
             <Modal
                 width={400}
