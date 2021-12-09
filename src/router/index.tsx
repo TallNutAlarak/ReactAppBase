@@ -11,6 +11,7 @@ const Router = () => {
             {routes.map((route) => {
                 return (
                     <Route
+                        key={route.path}
                         exact
                         path={route.path}
                         component={route.component}

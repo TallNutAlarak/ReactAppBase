@@ -7,7 +7,7 @@ interface IProps {
     goToList: () => void;
 }
 
-export default function ({ goToList }: IProps): ReactElement {
+export default function Add({ goToList }: IProps): ReactElement {
     return (
         <Card
             title={

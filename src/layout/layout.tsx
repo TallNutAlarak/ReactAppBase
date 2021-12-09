@@ -6,7 +6,7 @@ import HeaderContent from "./components/header-content";
 
 const { Header, Content, Sider } = Layout;
 
-export default function (props: { children: any }): ReactElement {
+export default function AppLayout(props: { children: any }): ReactElement {
     return (
         <Layout className="h-screen">
             <Header className="px-5" style={{ background: "#464b5c" }}>

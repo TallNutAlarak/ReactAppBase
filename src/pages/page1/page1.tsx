@@ -23,7 +23,7 @@ export default function (): ReactElement {
         setExamineModalVisible(true);
     };
 
-    const tenantTableColumns: ColumnsType<Object> = [
+    const tenantTableColumns: ColumnsType<Record<string, unknown>> = [
         {
             title: "姓名",
             dataIndex: "name",

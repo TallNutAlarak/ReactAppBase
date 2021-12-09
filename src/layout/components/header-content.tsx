@@ -4,7 +4,7 @@ import { LogoutOutlined, DownloadOutlined } from "@ant-design/icons";
 
 import { appContext } from "@store";
 
-export default function (): ReactElement {
+export default function Header(): ReactElement {
     const { dispatch } = useContext(appContext);
     return (
         <div className=" h-full flex justify-between items-center">

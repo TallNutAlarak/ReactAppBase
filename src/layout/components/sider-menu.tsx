@@ -7,7 +7,7 @@ import { appContext } from "@store";
 
 import type { SelectInfo } from "rc-menu/lib/interface";
 
-export default function (): ReactElement {
+export default function SiderMenu(): ReactElement {
     const location = useLocation();
     const history = useHistory();
     const { state } = useContext(appContext);

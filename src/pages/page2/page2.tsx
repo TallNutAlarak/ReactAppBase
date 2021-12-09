@@ -6,7 +6,7 @@ import NftFamilyList from "./components/list";
 import NftFamilyAdd from "./components/add";
 import NftFamilyEdit from "./components/edit";
 
-export default function (): ReactElement {
+export default function Page2(): ReactElement {
     const [pageMode, setPageMode] = useState<"list" | "edit" | "add">("list");
     const goToList = () => {
         setPageMode("list");

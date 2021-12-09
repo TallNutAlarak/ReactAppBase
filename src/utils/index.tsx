@@ -1,6 +1,8 @@
 export { exportDataByWorker } from "./export-excel";
 
-export const errorHandler = () => {};
+export const errorHandler = () => {
+    return "TODO"
+};
 
 export const isObject = (val: any) => {
     return Object.prototype.toString.call(val) === "[object Object]";
@@ -25,7 +27,7 @@ export const customLog = function (
                 "padding:3px 6px;border-radius:4px;font-size:14px;background:rgb(230, 247, 255);color:rgb(24, 144, 255);border:1px solid rgb(145, 213, 255)"
             );
         if (isObject(needLog)) {
-            for (let key in needLog) {
+            for (const key in needLog) {
                 console.log(`${key}:`, needLog[key]);
             }
         } else {
