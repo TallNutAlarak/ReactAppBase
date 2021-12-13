@@ -1,11 +1,30 @@
 import React, { useReducer } from "react";
 import { customLog } from "@utils";
 
-const initialState = {
+type ActionType =
+    | {
+          type: "reset";
+      }
+    | {
+          type: "login";
+          payload: {
+              role: string;
+          };
+      }
+    | {
+          type: "logout";
+      };
+
+interface IStoreState {
+    isLogin: boolean;
+    role: string | null;
+}
+
+const initialState: IStoreState = {
     isLogin: false,
     role: null,
 };
-function reducer(state: typeof initialState, action: any) {
+function reducer(state: typeof initialState, action: ActionType) {
     customLog({ state: state, action }, "dispatch before");
     let newState;
     switch (action.type) {
@@ -36,7 +55,7 @@ const appContext = React.createContext<{
     },
 });
 
-const AppContextProvider = (props: any) => {
+const AppContextProvider:React.FC = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <appContext.Provider value={{ state, dispatch }}>
