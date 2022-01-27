@@ -6,13 +6,13 @@ type ActionType =
           type: "reset";
       }
     | {
+          type: "logout";
+      }
+    | {
           type: "login";
           payload: {
               role: string;
           };
-      }
-    | {
-          type: "logout";
       };
 
 interface IStoreState {
@@ -24,6 +24,7 @@ const initialState: IStoreState = {
     isLogin: false,
     role: null,
 };
+
 function reducer(state: typeof initialState, action: ActionType) {
     customLog({ state: state, action }, "dispatch before");
     let newState;
@@ -55,7 +56,7 @@ const appContext = React.createContext<{
     },
 });
 
-const AppContextProvider:React.FC = (props) => {
+const AppContextProvider: React.FC = (props) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <appContext.Provider value={{ state, dispatch }}>
