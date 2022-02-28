@@ -55,8 +55,11 @@ const appContext = React.createContext<{
         throw new Error("dispatch error");
     },
 });
+interface IProps {
+    children: React.ReactNode;
+}
 
-const AppContextProvider: React.FC = (props) => {
+const AppContextProvider = (props: IProps) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
         <appContext.Provider value={{ state, dispatch }}>
