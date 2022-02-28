@@ -1,25 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
-import App from "@app/index";
-import "./index.css";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import zhCN from "antd/lib/locale/zh_CN";
-import dayjs from "dayjs";
-import { ConfigProvider } from "antd";
-import { AppContextProvider, appContext } from "@store";
-import "dayjs/locale/zh-cn";
+import App from '@app/index';
+import './index.css';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import zhCN from 'antd/lib/locale/zh_CN';
+import dayjs from 'dayjs';
+import { ConfigProvider } from 'antd';
+import { AppContextProvider, appContext } from '@store';
+import 'dayjs/locale/zh-cn';
 
-dayjs.locale("zh-cn");
+dayjs.locale('zh-cn');
 
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            refetchOnWindowFocus: false,
-        },
-    },
+            refetchOnWindowFocus: false
+        }
+    }
 });
 
 ReactDOM.render(
@@ -35,7 +35,7 @@ ReactDOM.render(
             </BrowserRouter>
         </ConfigProvider>
     </React.StrictMode>,
-    document.getElementById("root")
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

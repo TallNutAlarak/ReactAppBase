@@ -1,11 +1,11 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
-import { apiBaseUrl } from "@config";
+import { apiBaseUrl } from '@config';
 // import errorHandler from "@utils";
 
 const instance = axios.create({
     baseURL: `${apiBaseUrl}/1.0/app`,
-    timeout: 10000,
+    timeout: 10000
 });
 
 instance.interceptors.request.use(

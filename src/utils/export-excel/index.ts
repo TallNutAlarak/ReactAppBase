@@ -1,1 +1,1 @@
-export { exportDataByWorker } from "./export-by-worker";
+export { exportDataByWorker } from './export-by-worker';

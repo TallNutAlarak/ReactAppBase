@@ -1,24 +1,15 @@
-import React, { memo, useState, useEffect, useContext } from "react";
-import {} from "react-query";
-import useUrlState from "@ahooksjs/use-url-state";
-import {
-    Button,
-    Space,
-    Card,
-    Table,
-    Form,
-    Input,
-    DatePicker,
-    message,
-} from "antd";
-import type { TableColumnsType, TableColumnType } from "antd";
-import {} from "@ant-design/icons";
+import React, { memo, useState, useEffect, useContext } from 'react';
+import {} from 'react-query';
+import useUrlState from '@ahooksjs/use-url-state';
+import { Button, Space, Card, Table, Form, Input, DatePicker, message } from 'antd';
+import type { TableColumnsType, TableColumnType } from 'antd';
+import {} from '@ant-design/icons';
 
-import { appContext } from "@store";
-import { gqlReq } from "@services";
-import dayjs from "dayjs";
+import { appContext } from '@store';
+import { gqlReq } from '@services';
+import dayjs from 'dayjs';
 
-import SearchInput from "./components/SearchInput";
+import SearchInput from './components/SearchInput';
 
 const { RangePicker } = DatePicker;
 
@@ -37,12 +28,12 @@ type ITableFields = Array<IField | IFieldWithChildren>;
 
 interface ISearchConditionListItem {
     label: string;
-    type: "Input" | "RangePicker" | "SearchInput";
+    type: 'Input' | 'RangePicker' | 'SearchInput';
     formItemName: string;
     field: string;
     placeholder?: string;
     parent: string | null;
-    compareType: "exact" | "like" | "timeBetween";
+    compareType: 'exact' | 'like' | 'timeBetween';
 }
 type SearchConditionList = Array<ISearchConditionListItem>;
 
@@ -59,26 +50,23 @@ const GqlTable = (props: IGqlTableProps) => {
     const [urlState, setUrlState] = useUrlState({
         pageSize: 10,
         pageNumber: 1,
-        sorter_field: "createdAt",
-        sorter_order: "descend",
+        sorter_field: 'createdAt',
+        sorter_order: 'descend'
     });
     const [total, setTotal] = useState<number>(0);
     const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
 
     const [dataList, setDataList] = useState([]);
-    const [searchConditionList, setSearchConditionList] =
-        useState<SearchConditionList>([]);
+    const [searchConditionList, setSearchConditionList] = useState<SearchConditionList>([]);
     const [searchForm] = Form.useForm();
 
-    const isFieldWithChildren = (
-        field: IField | IFieldWithChildren
-    ): field is IFieldWithChildren => {
-        return "children" in field;
+    const isFieldWithChildren = (field: IField | IFieldWithChildren): field is IFieldWithChildren => {
+        return 'children' in field;
     };
 
     const fieldsToGqlDataString = (fields: ITableFields) => {
-        let str = "";
-        str += "{";
+        let str = '';
+        str += '{';
         fields.forEach((item) => {
             if (isFieldWithChildren(item)) {
                 str += `${item.field}${fieldsToGqlDataString(item.children)}`;
@@ -86,64 +74,49 @@ const GqlTable = (props: IGqlTableProps) => {
                 str += `${item.field} `;
             }
         });
-        str += "}";
+        str += '}';
         return str;
     };
-    const fieldsToTableColum = (
-        fields: ITableFields,
-        dataIndexParent: string[] = []
-    ) => {
+    const fieldsToTableColum = (fields: ITableFields, dataIndexParent: string[] = []) => {
         let ret: TableColumnsType<any> = [];
         fields.forEach((item) => {
             if (isFieldWithChildren(item)) {
-                ret.push(
-                    ...fieldsToTableColum(item.children, [
-                        ...dataIndexParent,
-                        item.field,
-                    ])
-                );
+                ret.push(...fieldsToTableColum(item.children, [...dataIndexParent, item.field]));
             } else {
                 if (!item.hidden) {
                     ret.push({
                         ...item,
                         title: item.name,
                         dataIndex: [...dataIndexParent, item.field],
-                        render: item.render,
+                        render: item.render
                     });
                 }
             }
         });
         return ret;
     };
-    const fieldsToSearchConditionList = (
-        fields: ITableFields,
-        parent: string | null = null
-    ) => {
+    const fieldsToSearchConditionList = (fields: ITableFields, parent: string | null = null) => {
         let ret: SearchConditionList = [];
         fields.forEach((item) => {
             if (isFieldWithChildren(item)) {
-                ret.push(
-                    ...fieldsToSearchConditionList(item.children, item.field)
-                );
+                ret.push(...fieldsToSearchConditionList(item.children, item.field));
             } else {
                 // 生成header筛选条件
                 if (item.search) {
-                    const baseSearchConditionListItem: ISearchConditionListItem =
-                        {
-                            label: item.name,
-                            type: "Input",
-                            formItemName:
-                                (parent ? `${parent}_` : "") + item.field,
-                            field: item.field,
-                            parent,
-                            compareType: "exact",
-                        };
+                    const baseSearchConditionListItem: ISearchConditionListItem = {
+                        label: item.name,
+                        type: 'Input',
+                        formItemName: (parent ? `${parent}_` : '') + item.field,
+                        field: item.field,
+                        parent,
+                        compareType: 'exact'
+                    };
                     if (item.search === true) {
                         ret.push(baseSearchConditionListItem);
                     } else {
                         ret.push({
                             ...baseSearchConditionListItem,
-                            ...item.search,
+                            ...item.search
                         });
                     }
                 }
@@ -160,38 +133,34 @@ const GqlTable = (props: IGqlTableProps) => {
             where: {},
             limit: Number(pageSize),
             skip: (Number(pageNumber) - 1) * Number(pageSize),
-            order: `${sorter_order === "ascend" ? "" : "-"}${sorter_field}`,
+            order: `${sorter_order === 'ascend' ? '' : '-'}${sorter_field}`
         };
         searchConditionList.forEach((item) => {
             if (searchCondition[item.formItemName]) {
                 let whereValue;
-                if (item.compareType === "exact") {
+                if (item.compareType === 'exact') {
                     whereValue = searchCondition[item.formItemName];
-                } else if (item.compareType === "like") {
+                } else if (item.compareType === 'like') {
                     whereValue = {
-                        like: `%${searchCondition[item.formItemName]}%`,
+                        like: `%${searchCondition[item.formItemName]}%`
                     };
-                } else if (item.compareType === "timeBetween") {
+                } else if (item.compareType === 'timeBetween') {
                     whereValue = {
                         between: [
-                            dayjs(searchCondition[item.formItemName][0])
-                                .startOf("date")
-                                .format("YYYY-MM-DD HH:mm:ss"),
-                            dayjs(searchCondition[item.formItemName][1])
-                                .endOf("date")
-                                .format("YYYY-MM-DD HH:mm:ss"),
-                        ],
+                            dayjs(searchCondition[item.formItemName][0]).startOf('date').format('YYYY-MM-DD HH:mm:ss'),
+                            dayjs(searchCondition[item.formItemName][1]).endOf('date').format('YYYY-MM-DD HH:mm:ss')
+                        ]
                     };
                 } else {
-                    throw new Error("abnormal compareType");
+                    throw new Error('abnormal compareType');
                 }
 
                 if (item.parent) {
                     params.findby = {
                         extend: item.parent,
                         where: {
-                            [item.field]: whereValue,
-                        },
+                            [item.field]: whereValue
+                        }
                     };
                 } else {
                     params.where[item.field] = whereValue;
@@ -200,16 +169,13 @@ const GqlTable = (props: IGqlTableProps) => {
         });
         const { find, count } = gqlReq(tableName);
         try {
-            const ret: any = await Promise.all([
-                find(params, fieldsToGqlDataString(fields)),
-                count(params),
-            ]);
+            const ret: any = await Promise.all([find(params, fieldsToGqlDataString(fields)), count(params)]);
             const dataAry = ret[0].data.data[`find_${tableName}`];
             const dataAryCount = ret[1].data.data[`count_${tableName}`];
             setDataList(dataAry);
             setTotal(dataAryCount);
         } catch (err) {
-            message.error("获取数据失败");
+            message.error('获取数据失败');
         }
         setIsDataLoading(false);
     };
@@ -224,34 +190,31 @@ const GqlTable = (props: IGqlTableProps) => {
     }, [urlState]);
 
     const columns = operation
-        ? [...fieldsToTableColum(fields), { title: "操作", ...operation }]
+        ? [...fieldsToTableColum(fields), { title: '操作', ...operation }]
         : fieldsToTableColum(fields);
     return (
         <div>
             <Card>
-                <Form form={searchForm} layout="inline">
+                <Form form={searchForm} layout='inline'>
                     {searchConditionList.map((item) => {
                         const baseFormComponentProps = {
-                            style: { width: 200 },
+                            style: { width: 200 }
                         };
                         let FormComponent: any;
                         switch (item.type) {
-                            case "Input":
+                            case 'Input':
                                 FormComponent = (
-                                    <Input
-                                        placeholder={item.placeholder}
-                                        {...baseFormComponentProps}
-                                    ></Input>
+                                    <Input placeholder={item.placeholder} {...baseFormComponentProps}></Input>
                                 );
                                 break;
-                            case "RangePicker":
+                            case 'RangePicker':
                                 FormComponent = (
                                     <RangePicker
                                     // {...baseFormComponentProps}
                                     ></RangePicker>
                                 );
                                 break;
-                            case "SearchInput":
+                            case 'SearchInput':
                                 FormComponent = (
                                     <SearchInput
                                         field={item.field}
@@ -262,28 +225,23 @@ const GqlTable = (props: IGqlTableProps) => {
                                 );
                                 break;
                             default:
-                                throw new Error(
-                                    "searchConditionListItem type error"
-                                );
+                                throw new Error('searchConditionListItem type error');
                         }
                         return (
-                            <Form.Item
-                                label={item.label}
-                                name={item.formItemName}
-                            >
+                            <Form.Item label={item.label} name={item.formItemName}>
                                 {FormComponent}
                             </Form.Item>
                         );
                     })}
                     <Form.Item>
                         <Button
-                            type="primary"
-                            htmlType="submit"
+                            type='primary'
+                            htmlType='submit'
                             onClick={() => {
                                 setUrlState({
                                     pageNumber: 1,
                                     ...urlState,
-                                    ...searchForm.getFieldsValue(),
+                                    ...searchForm.getFieldsValue()
                                 });
                             }}
                         >
@@ -295,7 +253,7 @@ const GqlTable = (props: IGqlTableProps) => {
                                 setUrlState({
                                     pageSize: urlState.pageSize,
                                     pageNumber: 1,
-                                    ...searchForm.getFieldsValue(),
+                                    ...searchForm.getFieldsValue()
                                 });
                             }}
                         >
@@ -314,7 +272,7 @@ const GqlTable = (props: IGqlTableProps) => {
                     pageSize: Number(urlState.pageSize),
                     current: Number(urlState.pageNumber),
                     showTotal: (total) => `总共 ${total} 项`,
-                    total,
+                    total
                 }}
                 onChange={(pagination, filters, sorter, extra) => {
                     console.log(pagination, filters, sorter, extra);
@@ -325,7 +283,7 @@ const GqlTable = (props: IGqlTableProps) => {
                         pageNumber: current,
                         pageSize: pageSize,
                         sorter_order: order,
-                        sorter_field: field || "createdAt",
+                        sorter_field: field || 'createdAt'
                     });
                 }}
             ></Table>

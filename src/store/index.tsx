@@ -1,15 +1,15 @@
-import React, { useReducer } from "react";
-import { customLog } from "@utils";
+import React, { useReducer } from 'react';
+import { customLog } from '@utils';
 
 type ActionType =
     | {
-          type: "reset";
+          type: 'reset';
       }
     | {
-          type: "logout";
+          type: 'logout';
       }
     | {
-          type: "login";
+          type: 'login';
           payload: {
               role: string;
           };
@@ -22,27 +22,27 @@ interface IStoreState {
 
 const initialState: IStoreState = {
     isLogin: false,
-    role: null,
+    role: null
 };
 
 function reducer(state: typeof initialState, action: ActionType) {
-    customLog({ state: state, action }, "dispatch before");
+    customLog({ state: state, action }, 'dispatch before');
     let newState;
     switch (action.type) {
-        case "reset":
+        case 'reset':
             newState = initialState;
             break;
-        case "login":
+        case 'login':
             newState = { ...state, isLogin: true, role: action.payload.role };
             break;
-        case "logout":
+        case 'logout':
             newState = { ...state, isLogin: false, role: null };
             break;
         default:
             newState = state;
             break;
     }
-    customLog({ newState, action }, "dispatch after");
+    customLog({ newState, action }, 'dispatch after');
     return newState;
 }
 
@@ -52,8 +52,8 @@ const appContext = React.createContext<{
 }>({
     state: initialState,
     dispatch: () => {
-        throw new Error("dispatch error");
-    },
+        throw new Error('dispatch error');
+    }
 });
 interface IProps {
     children: React.ReactNode;
@@ -61,11 +61,7 @@ interface IProps {
 
 const AppContextProvider = (props: IProps) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    return (
-        <appContext.Provider value={{ state, dispatch }}>
-            {props.children}
-        </appContext.Provider>
-    );
+    return <appContext.Provider value={{ state, dispatch }}>{props.children}</appContext.Provider>;
 };
 
 export { appContext, AppContextProvider };

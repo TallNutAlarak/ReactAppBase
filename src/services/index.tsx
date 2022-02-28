@@ -1,6 +1,6 @@
-import request from "./request";
+import request from './request';
 
-export { default as gqlReq } from "./gqlReq";
+export { default as gqlReq } from './gqlReq';
 
 export const queryNFTFamily = () => {
     return request({});

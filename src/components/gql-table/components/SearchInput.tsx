@@ -1,8 +1,8 @@
-import React, { ReactElement, useState } from "react";
-import { Select } from "antd";
-import type { SelectProps } from "antd";
-import { gqlReq } from "@services";
-import { debounce } from "lodash-es";
+import React, { ReactElement, useState } from 'react';
+import { Select } from 'antd';
+import type { SelectProps } from 'antd';
+import { gqlReq } from '@services';
+import { debounce } from 'lodash-es';
 
 const { Option } = Select;
 
@@ -20,26 +20,24 @@ export default function SearchInput(props: Props): ReactElement {
                 where: {
                     ...(props.parent === null && {
                         [props.field]: {
-                            like: `%${value}%`,
-                        },
-                    }),
+                            like: `%${value}%`
+                        }
+                    })
                 },
                 ...(props.parent && {
                     findby: {
                         extend: props.parent,
                         where: {
                             [props.field]: {
-                                like: `%${value}%`,
-                            },
-                        },
-                    },
+                                like: `%${value}%`
+                            }
+                        }
+                    }
                 }),
                 limit: 10,
-                skip: 0,
+                skip: 0
             },
-            `{${
-                props.parent ? `${props.parent}{${props.field}}` : props.field
-            }}`
+            `{${props.parent ? `${props.parent}{${props.field}}` : props.field}}`
         );
     };
     return (
@@ -53,13 +51,9 @@ export default function SearchInput(props: Props): ReactElement {
                         const ret: any = await fetchOptions(value);
                         if (ret.data.data[`find_${props.tableName}`]) {
                             setSearchOptions(
-                                ret.data.data[`find_${props.tableName}`].map(
-                                    (i: any) => ({
-                                        value: props.parent
-                                            ? i[props.parent][props.field]
-                                            : i[props.field],
-                                    })
-                                )
+                                ret.data.data[`find_${props.tableName}`].map((i: any) => ({
+                                    value: props.parent ? i[props.parent][props.field] : i[props.field]
+                                }))
                             );
                         }
                     } else {

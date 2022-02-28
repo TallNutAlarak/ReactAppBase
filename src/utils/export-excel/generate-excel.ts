@@ -1,7 +1,7 @@
-import { File } from "better-xlsx";
-import { saveAs } from "file-saver";
-import dayjs from "dayjs";
-import type { TableColumnsType } from "antd";
+import { File } from 'better-xlsx';
+import { saveAs } from 'file-saver';
+import dayjs from 'dayjs';
+import type { TableColumnsType } from 'antd';
 
 export function generateExcel<T = any>(
     column: TableColumnsType<T>, //antd 用的column
@@ -40,21 +40,15 @@ export function generateExcel<T = any>(
     dataSource.map((ele: any) => {
         let dataTemp: any = [];
         columnLineArr.forEach((item: any) => {
-            if (
-                typeof item.dataIndex === "string" ||
-                item.dataIndex === undefined
-            ) {
+            if (typeof item.dataIndex === 'string' || item.dataIndex === undefined) {
                 dataTemp.push({
                     [item.dataIndex]: ele[item.dataIndex],
-                    value: ele[item.dataIndex],
+                    value: ele[item.dataIndex]
                 });
             } else {
                 dataTemp.push({
-                    [item.dataIndex.join(".")]: getValueFromDataIndex(
-                        item.dataIndex,
-                        ele
-                    ),
-                    value: getValueFromDataIndex(item.dataIndex, ele),
+                    [item.dataIndex.join('.')]: getValueFromDataIndex(item.dataIndex, ele),
+                    value: getValueFromDataIndex(item.dataIndex, ele)
                 });
             }
         });
@@ -70,17 +64,14 @@ export function generateExcel<T = any>(
         item.map((ele: any) => {
             let cell = row.addCell();
 
-            if (ele.hasOwnProperty("num")) {
+            if (ele.hasOwnProperty('num')) {
                 cell.value = index + 1;
             }
             // else if (ele.hasOwnProperty("status")) {
             //     cell.value = formatter["status"][ele.value];
             // }
-            else if (
-                ele.hasOwnProperty("createdAt") ||
-                ele.hasOwnProperty("updatedAt")
-            ) {
-                cell.value = dayjs(ele.value).format("YYYY-MM-DD HH:mm:ss");
+            else if (ele.hasOwnProperty('createdAt') || ele.hasOwnProperty('updatedAt')) {
+                cell.value = dayjs(ele.value).format('YYYY-MM-DD HH:mm:ss');
             } else {
                 cell.value = ele.value;
                 if (formatter) {
@@ -91,8 +82,8 @@ export function generateExcel<T = any>(
                     });
                 }
             }
-            cell.style.align.v = "center";
-            cell.style.align.h = "center";
+            cell.style.align.v = 'center';
+            cell.style.align.h = 'center';
         });
     });
     //设置每列的宽度
@@ -117,18 +108,15 @@ export function generateExcel<T = any>(
         column.map((item: any) => {
             let hCell = sheet.cell(rowIndex, columnIndex);
             // 如果没有子元素, 撑满列
-            if (["操作", "审核"].includes(item.title)) {
-                hCell.value = "";
+            if (['操作', '审核'].includes(item.title)) {
+                hCell.value = '';
                 columnIndex++;
-            } else if (
-                item.children === undefined ||
-                item.children.length === 0
-            ) {
+            } else if (item.children === undefined || item.children.length === 0) {
                 // 第一行加一个单元格
                 hCell.value = item.title;
                 hCell.vMerge = depth - rowIndex - 1;
-                hCell.style.align.h = "center";
-                hCell.style.align.v = "center";
+                hCell.style.align.h = 'center';
+                hCell.style.align.v = 'center';
                 columnIndex++;
                 // rowIndex++
             } else {
@@ -145,8 +133,8 @@ export function generateExcel<T = any>(
                 getColumns(item.children);
                 hCell.hMerge = childrenNum - 1;
                 hCell.value = item.title;
-                hCell.style.align.h = "center";
-                hCell.style.align.v = "center";
+                hCell.style.align.h = 'center';
+                hCell.style.align.v = 'center';
                 let rowCopy = rowIndex;
                 rowCopy++;
                 init(item.children, rowCopy, columnIndex);
@@ -197,7 +185,7 @@ export function generateExcel<T = any>(
                 return v[key];
             }, obj);
         } catch (err) {
-            return "";
+            return '';
         }
     }
 }

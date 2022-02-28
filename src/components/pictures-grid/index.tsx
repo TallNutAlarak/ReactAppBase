@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import {
-    arrayMove,
-    SortableContainer,
-    SortableElement,
-} from "react-sortable-hoc";
-import { Modal, Upload } from "antd";
-import UploadList from "antd/es/upload/UploadList";
+import React, { useState } from 'react';
+import { arrayMove, SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { Modal, Upload } from 'antd';
+import UploadList from 'antd/es/upload/UploadList';
 
-import type { CSSProperties } from "react";
+import type { CSSProperties } from 'react';
 
 const { Dragger } = Upload;
 
@@ -17,13 +13,13 @@ const itemStyle = {
     width: 104,
     height: 104,
     margin: 4,
-    cursor: "grab",
+    cursor: 'grab'
 };
 
 const SortableItem = SortableElement((params: any) => (
     <div style={itemStyle}>
         <UploadList
-            locale={{ previewFile: "预览图片", removeFile: "删除图片" }}
+            locale={{ previewFile: '预览图片', removeFile: '删除图片' }}
             showDownloadIcon={false}
             listType={params.props.listType}
             onPreview={params.onPreview}
@@ -34,8 +30,8 @@ const SortableItem = SortableElement((params: any) => (
 ));
 
 const listStyle: CSSProperties = {
-    display: "flex",
-    flexWrap: "wrap",
+    display: 'flex',
+    flexWrap: 'wrap'
     // maxWidth: 400,
     // minWidth: 400,
 };
@@ -56,7 +52,7 @@ const SortableList = SortableContainer((params: any) => {
             </div>
             <Upload
                 {...params.props}
-                accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"
+                accept='image/gif,image/jpeg,image/jpg,image/png,image/svg'
                 showUploadList={false}
                 onChange={params.onChange}
             >
@@ -67,7 +63,7 @@ const SortableList = SortableContainer((params: any) => {
 });
 
 const getBase64 = (file: Blob) => {
-    if (!file) return Promise.reject(new Error("no file"));
+    if (!file) return Promise.reject(new Error('no file'));
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -81,14 +77,14 @@ const imagePreview = async (file: any, callback: any) => {
     if (!newFile.url && !newFile.preview) {
         newFile.preview = await getBase64(file.originFileObj);
     }
-    const newPreviewImage = newFile.url || newFile.preview || "";
+    const newPreviewImage = newFile.url || newFile.preview || '';
     callback({
-        image: newPreviewImage,
+        image: newPreviewImage
     });
 };
 
 const PicturesGrid = ({ onChange: onFileChange, ...props }: any) => {
-    const [previewImage, setPreviewImage] = useState("");
+    const [previewImage, setPreviewImage] = useState('');
     const fileList = props.fileList || [];
     const onSortEnd = ({ oldIndex, newIndex }: any) => {
         onFileChange({ fileList: arrayMove(fileList, oldIndex, newIndex) });
@@ -99,9 +95,7 @@ const PicturesGrid = ({ onChange: onFileChange, ...props }: any) => {
     };
 
     const onRemove = (file: any) => {
-        const newFileList = fileList.filter(
-            (item: any) => item.uid !== file.uid
-        );
+        const newFileList = fileList.filter((item: any) => item.uid !== file.uid);
         onFileChange({ fileList: newFileList });
     };
 
@@ -117,8 +111,8 @@ const PicturesGrid = ({ onChange: onFileChange, ...props }: any) => {
                 distance={1}
                 items={fileList}
                 onSortEnd={onSortEnd}
-                axis="xy"
-                helperClass="SortableHelper"
+                axis='xy'
+                helperClass='SortableHelper'
                 props={props}
                 onChange={onChange}
                 onRemove={onRemove}
@@ -127,10 +121,10 @@ const PicturesGrid = ({ onChange: onFileChange, ...props }: any) => {
             <Modal
                 visible={!!previewImage}
                 footer={null}
-                onCancel={() => setPreviewImage("")}
+                onCancel={() => setPreviewImage('')}
                 bodyStyle={{ padding: 0 }}
             >
-                <img style={{ width: "100%" }} alt="" src={previewImage} />
+                <img style={{ width: '100%' }} alt='' src={previewImage} />
             </Modal>
         </>
     );

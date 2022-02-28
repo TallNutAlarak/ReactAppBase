@@ -1,6 +1,6 @@
-import React from "react";
-import { Result, Button } from "antd";
-import { withRouter } from "react-router";
+import React from 'react';
+import { Result, Button } from 'antd';
+import { withRouter } from 'react-router';
 
 class ErrorBoundary extends React.Component<any, any> {
     constructor(props: any) {
@@ -14,7 +14,7 @@ class ErrorBoundary extends React.Component<any, any> {
     }
 
     componentDidCatch(error: any, errorInfo: any) {
-        console.log("componentDidCatch");
+        console.log('componentDidCatch');
         // 你同样可以将错误日志上报给服务器
     }
 
@@ -23,14 +23,14 @@ class ErrorBoundary extends React.Component<any, any> {
             // 你可以自定义降级后的 UI 并渲染
             return (
                 <Result
-                    status="warning"
-                    title="页面崩溃了"
+                    status='warning'
+                    title='页面崩溃了'
                     subTitle={this.state.error}
                     extra={
                         <Button
                             onClick={() => {
                                 const { history } = this.props;
-                                history.replace("/");
+                                history.replace('/');
                             }}
                         >
                             回到首页
