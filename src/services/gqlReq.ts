@@ -42,6 +42,9 @@ const obj2gqlString = (obj: any) => {
                       ? `{${obj2gqlString(obj[key])}}`
                       : canConvertNumber(obj[key])
                       ? Number(obj[key])
+                      : Array.isArray(obj[key]) &&
+                        obj[key].some((item: any) => isObject(item))
+                      ? `[${obj[key].map((i: any) => `{${obj2gqlString(i)}}`)}]`
                       : JSON.stringify(obj[key])
               }`
             : "";
